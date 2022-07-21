@@ -21,13 +21,11 @@ package net.catenax.core.managedidentitywallets.routes
 
 import io.bkbn.kompendium.auth.Notarized.notarizedAuthenticate
 import io.bkbn.kompendium.core.Notarized.notarizedPost
-import io.bkbn.kompendium.core.metadata.RequestInfo
 import io.bkbn.kompendium.core.metadata.ResponseInfo
 import io.bkbn.kompendium.core.metadata.method.PostInfo
 
 import io.ktor.application.*
 import io.ktor.http.*
-import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
@@ -41,28 +39,22 @@ fun Route.businessPartnerDataRoutes(businessPartnerDataService: BusinessPartnerD
 
         notarizedAuthenticate(AuthConstants.JWT_AUTH_UPDATE) {
             notarizedPost(
-                PostInfo<Unit, BusinessPartnerDataUpdateRequestDto, String>(
-                    summary = "Update business partner data in the corresponding wallet",
-                    description = "Create or update data associated with a given bpn in the corresponding wallet by creating or updating verifiable credentials",
-                    requestInfo = RequestInfo(
-                        description = "The input data to use for the update",
-                        examples = dataUpdateRequestDtoExample
-                    ),
+                PostInfo<Unit, Unit, String>(
+                    summary = "Pull business partner data from BPDM and issue or update credentials",
+                    description = "Pull business partner data from BPDM and create or update verifiable credentials",
+                    requestInfo = null,
                     responseInfo = ResponseInfo(
                         status = HttpStatusCode.Accepted,
                         description = "Empty response body"
                     ),
-                    canThrow = setOf(semanticallyInvalidInputException),
                     tags = setOf("BusinessPartnerData"),
                     securitySchemes = setOf(AuthConstants.JWT_AUTH_UPDATE.name)
                 )
             ) {
-                val dataUpdateRequestDto = call.receive<BusinessPartnerDataUpdateRequestDto>()
-                businessPartnerDataService.issueAndUpdateCatenaXCredentials(dataUpdateRequestDto)
+                businessPartnerDataService.pullDataAndUpdateCatenaXCredentialsAsync()
                 call.respond(HttpStatusCode.Accepted)
             }
         }
-
     }
 }
 
@@ -125,6 +117,7 @@ val dataUpdateRequestDtoExample = mapOf(
         addresses = listOf(
             AddressDto(
                 uuid = "16701107-9559-4fdf-b1c1-8c98799d779d",
+                bpn = "BPNL000000000001",
                 version = AddressVersion(
                     characterSet = TypeKeyNameDto(
                         technicalKey = "WESTERN_LATIN_STANDARD",
@@ -226,6 +219,8 @@ val dataUpdateRequestDtoExample = mapOf(
         ),
         bankAccounts = listOf(),
         roles = listOf(),
-        relations = listOf()
+        sites = listOf(),
+        relations = listOf(),
+        currentness = "2022-06-03T11:46:15.143429Z"
     )
 )

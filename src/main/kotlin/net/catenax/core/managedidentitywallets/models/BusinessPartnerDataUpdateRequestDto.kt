@@ -19,8 +19,35 @@
 
 package net.catenax.core.managedidentitywallets.models
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import io.bkbn.kompendium.annotations.Field
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+
+@Serializable
+data class AccessToken(
+    val access_token: String,
+    val expires_in: Int,
+    @SerialName("refresh_expires_in")
+    val refreshExpiresIn: Int,
+    @SerialName("token_type")
+    val tokenType: String,
+    @SerialName("id_token")
+    val idToken: String,
+    @SerialName("not-before-policy")
+    val notBeforePolicy: Int,
+    val scope: String
+)
+
+@Serializable
+data class BPMDConfig(
+    val url: String,
+    val tokenUrl: String,
+    val clientId: String,
+    val clientSecret: String,
+    val grantType: String,
+    val scope: String
+)
 
 // TODO need to analyze the data updates if that could be made
 // in a generic way without any logic to map it to the wallet
@@ -119,6 +146,8 @@ data class BusinessPartnerDataUpdateRequestDto(
     val addresses: Collection<AddressDto>,
     @Field(description = "Profile classifications", name = "profileClassifications")
     val profileClassifications: List<ClassificationDto>,
+    @Field(description = "sites", name = "sites")
+    val sites: List<SiteDto>? = null,
     @Field(description = "Types", name = "types")
     val types: Collection<TypeKeyNameUrlDto>,
     @Field(description = "Bank accounts", name = "bankAccounts")
@@ -126,7 +155,9 @@ data class BusinessPartnerDataUpdateRequestDto(
     @Field(description = "Roles", name = "roles")
     val roles: Collection<TypeKeyNameDto>,
     @Field(description = "Relations", name = "relations")
-    val relations: Collection<RelationDto>
+    val relations: Collection<RelationDto>,
+    @Field(description = "Currentness", name = "currentness")
+    val currentness: String?
 )
 
 @Serializable
@@ -208,6 +239,8 @@ data class GeoCoordinateDto(
 data class AddressDto(
     @Field(description = "UUID", name = "uuid")
     val uuid: String,
+    @Field(description = "Business Partner Number", name = "bpn")
+    val bpn: String? = null,
     @Field(description = "Version", name = "version")
     val version: AddressVersion,
     @Field(description = "Entity which is in care of this address", name = "careOf")
@@ -232,4 +265,14 @@ data class AddressDto(
     val geographicCoordinates: GeoCoordinateDto?,
     @Field(description = "Types of this address", name = "types")
     val types: Collection<TypeKeyNameUrlDto>
+)
+
+@Serializable
+data class SiteDto (
+    @Field(description = "Business Partner Number, main identifier value for sites", name = "bpn")
+    val bpn: String,
+    @Field(description = "Site name", name = "name")
+    val name: String,
+    @Field(description = "Addresses of the site", name = "addresses")
+    val addresses: AddressDto
 )

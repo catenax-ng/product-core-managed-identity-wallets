@@ -40,6 +40,8 @@ interface WalletService {
 
     fun getAll(): List<WalletDto>
 
+    fun getAllBpns(): List<String>
+
     suspend fun createWallet(walletCreateDto: WalletCreateDto): WalletDto
 
     suspend fun deleteWallet(identifier: String): Boolean
@@ -47,6 +49,8 @@ interface WalletService {
     fun storeCredential(identifier: String, issuedCredential: IssuedVerifiableCredentialRequestDto): Boolean
 
     suspend fun issueCredential(vcRequest: VerifiableCredentialRequestDto): VerifiableCredentialDto
+
+    suspend fun deleteCredential(id: String): Boolean
 
     suspend fun issueCatenaXCredential(vcCatenaXRequest: VerifiableCredentialRequestWithoutIssuerDto): VerifiableCredentialDto
 

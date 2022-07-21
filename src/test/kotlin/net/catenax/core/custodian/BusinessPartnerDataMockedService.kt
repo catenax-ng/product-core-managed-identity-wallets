@@ -26,9 +26,7 @@ import net.catenax.core.managedidentitywallets.services.BusinessPartnerDataServi
 
 class BusinessPartnerDataMockedService: BusinessPartnerDataService {
 
-    override suspend fun issueAndUpdateCatenaXCredentials(businessPartnerData: BusinessPartnerDataUpdateRequestDto) {
-
-    }
+    override suspend fun pullDataAndUpdateCatenaXCredentialsAsync() {}
 
     override suspend fun <T> issueAndStoreCatenaXCredentialsAsync(
         bpn: String,

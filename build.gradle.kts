@@ -63,11 +63,14 @@ dependencies {
 
     implementation("decentralized-identity:did-common-java:1.0.0")
 
+    implementation("com.github.kibertoad:ktor-scheduler:1.0.4")
+    implementation("org.jobrunr:jobrunr:4.0.5")
+    implementation("org.postgresql:postgresql:42.4.0")
+
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     testImplementation(kotlin("test"))
 
     runtimeOnly("org.xerial:sqlite-jdbc:3.36.0.3")
-    runtimeOnly("org.postgresql:postgresql:42.2.25")
 
 }

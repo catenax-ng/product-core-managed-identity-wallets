@@ -153,6 +153,13 @@ below. Here a few hints on how to set it up:
 14. `ACAPY_ADMIN_API_KEY`: specify the admin api key of Aca-Py enpoints, e.g. `Hj23iQUsstG!dde`
 15. `CX_BPN`: specify the bpn of the catenaX wallet, e.g. `Bpn111` This wallet should be the first wallet to create.
 
+15. `BPDM_BASE_URL`: specify the base url of the `BPDM` e.g. `https://catenax-bpdm-int.demo.catena-x.net`
+15. `BPDM_AUTH_CLIENT_ID`: specify the expected client id
+15. `BPDM_AUTH_CLIENT_SECRET=`: specify the expected client secret
+15. `BPDM_AUTH_GRANT_TYPE`: specify the expected grant type e.g. `client_credentials`
+15. `BPDM_AUTH_SCOPE`: specify the expected scope e.g. `openid`
+15. `BPDM_AUTH_URL`: specify the url to get the access token of `BPDM` e.g. `https://centralidp.demo.catena-x.net/auth/realms/CX-Central/protocol/openid-connect/token`
+
 ## Local development environment <a id= "localDevelopmentEnvironment"></a>
 
 To resemble the staging and production system as much as possible also on the

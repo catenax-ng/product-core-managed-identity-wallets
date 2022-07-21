@@ -719,183 +719,6 @@ class ApplicationTest {
                 addHeader(HttpHeaders.Authorization, "Bearer $UPDATE_TOKEN")
                 addHeader(HttpHeaders.Accept, ContentType.Application.Json.toString())
                 addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-                setBody(
-"""{
-  "bpn": "BPNL000000000001",
-  "identifiers": [
-    {
-      "uuid": "089e828d-01ed-4d3e-ab1e-cccca26814b3",
-      "value": "BPNL000000000001",
-      "type": {
-        "technicalKey": "BPN",
-        "name": "Business Partner Number",
-        "url": ""
-      },
-      "issuingBody": {
-        "technicalKey": "CATENAX",
-        "name": "Catena-X",
-        "url": ""
-      },
-      "status": {
-        "technicalKey": "UNKNOWN",
-        "name": "Unknown"
-      }
-    }
-  ],
-  "names": [
-    {
-      "uuid": "de3f3db6-e337-436b-a4e0-fc7d17e8af89",
-      "value": "German Car Company",
-      "shortName": "GCC",
-      "type": {
-        "technicalKey": "REGISTERED",
-        "name": "The main name under which a business is officially registered in a country's business register.",
-        "url": ""
-      },
-      "language": {
-        "technicalKey": "undefined",
-        "name": "Undefined"
-      }
-    },
-    {
-      "uuid": "defc3da4-92ef-44d9-9aee-dcedc2d72e0e",
-      "value": "German Car Company",
-      "shortName": "GCC",
-      "type": {
-        "technicalKey": "INTERNATIONAL",
-        "name": "The international version of the local name of a business partner",
-        "url": ""
-      },
-      "language": {
-        "technicalKey": "undefined",
-        "name": "Undefined"
-      }
-    }
-  ],
-  "legalForm": {
-    "technicalKey": "DE_AG",
-    "name": "Aktiengesellschaft",
-    "url": "",
-    "mainAbbreviation": "AG",
-    "language": {
-      "technicalKey": "de",
-      "name": "German"
-    },
-    "categories": [
-      {
-        "name": "AG",
-        "url": ""
-      }
-    ]
-  },
-  "status": null,
-  "addresses": [
-    {
-      "uuid": "16701107-9559-4fdf-b1c1-8c98799d779d",
-      "version": {
-        "characterSet": {
-          "technicalKey": "WESTERN_LATIN_STANDARD",
-          "name": "Western Latin Standard (ISO 8859-1; Latin-1)"
-        },
-        "language": {
-          "technicalKey": "en",
-          "name": "English"
-        }
-      },
-      "careOf": null,
-      "contexts": [],
-      "country": {
-        "technicalKey": "DE",
-        "name": "Germany"
-      },
-      "administrativeAreas": [
-        {
-          "uuid": "cc6de665-f8eb-45ed-b2bd-6caa28fa8368",
-          "value": "Bavaria",
-          "shortName": "BY",
-          "fipsCode": "GM02",
-          "type": {
-            "technicalKey": "REGION",
-            "name": "Region",
-            "url": ""
-          },
-          "language": {
-            "technicalKey": "en",
-            "name": "English"
-          }
-        }
-      ],
-      "postCodes": [
-        {
-          "uuid": "8a02b3d0-de1e-49a5-9528-cfde2d5273ed",
-          "value": "80807",
-          "type": {
-            "technicalKey": "REGULAR",
-            "name": "Regular",
-            "url": ""
-          }
-        }
-      ],
-      "localities": [
-        {
-          "uuid": "2cd18685-fac9-49f4-a63b-322b28f7dc9a",
-          "value": "Munich",
-          "shortName": "M",
-          "type": {
-            "technicalKey": "CITY",
-            "name": "City",
-            "url": ""
-          },
-          "language": {
-            "technicalKey": "en",
-            "name": "English"
-          }
-        }
-      ],
-      "thoroughfares": [
-        {
-          "uuid": "0c491424-b2bc-44cf-9d14-71cbe513423f",
-          "value": "Muenchner Straße 34",
-          "name": "Muenchner Straße",
-          "shortName": null,
-          "number": "34",
-          "direction": null,
-          "type": {
-            "technicalKey": "STREET",
-            "name": "Street",
-            "url": ""
-          },
-          "language": {
-            "technicalKey": "en",
-            "name": "English"
-          }
-        }
-      ],
-      "premises": [],
-      "postalDeliveryPoints": [],
-      "geographicCoordinates": null,
-      "types": [
-        {
-          "technicalKey": "HEADQUARTER",
-          "name": "Headquarter",
-          "url": ""
-        }
-      ]
-    }
-  ],
-  "profileClassifications": [],
-  "types": [
-    {
-      "technicalKey": "LEGAL_ENTITY",
-      "name": "Legal Entity",
-      "url": ""
-    }
-  ],
-  "bankAccounts": [],
-  "roles": [],
-  "relations": []
-}"""
-                )
             }.apply {
                 assertEquals(HttpStatusCode.Accepted, response.status())
             }
@@ -1137,18 +960,18 @@ class ApplicationTest {
                 "Verifiable credential http://example.edu/credentials/3735 expired 2021-06-17T18:56:59Z"))
 
             var vpWithFutureVC = """
-                {
+                 {
                     "@context": [
                         "https://www.w3.org/2018/credentials/v1"
                     ],
-                    "id": "3dc8c2c7-5318-4b23-92e4-71a1687ca4fe",
+                    "id": "7aed00f7-8e04-4093-b467-9bd084b42086",
                     "type": [
                         "VerifiablePresentation"
                     ],
                     "holder": "did:indy:local:test:YHXZLLSLnKxz5D2HQaKXcP",
                     "verifiableCredential": [
                         {
-                            "id": "http://example.edu/credentials/3735",
+                            "id": "http://example.edu/credentials/3888",
                             "@context": [
                                 "https://www.w3.org/2018/credentials/v1",
                                 "https://www.w3.org/2018/credentials/examples/v1"
@@ -1158,8 +981,8 @@ class ApplicationTest {
                                 "VerifiableCredential"
                             ],
                             "issuer": "did:indy:local:test:M6Mis1fZKuhEw71GNY3TAb",
-                            "issuanceDate": "2025-06-16T18:56:59Z",
-                            "expirationDate": "2026-06-17T18:56:59Z",
+                            "issuanceDate": "2999-06-16T18:56:59Z",
+                            "expirationDate": "2999-06-17T18:56:59Z",
                             "credentialSubject": {
                                 "givenName": "TestAfterQuestion",
                                 "familyName": "Student",
@@ -1173,19 +996,19 @@ class ApplicationTest {
                             },
                             "proof": {
                                 "type": "Ed25519Signature2018",
-                                "created": "2022-07-13T14:39:53Z",
+                                "created": "2022-07-21T13:17:21Z",
                                 "proofPurpose": "assertionMethod",
                                 "verificationMethod": "did:indy:local:test:M6Mis1fZKuhEw71GNY3TAb#key-1",
-                                "jws": "eyJhbGciOiAiRWREU0EiLCAiYjY0IjogZmFsc2UsICJjcml0IjogWyJiNjQiXX0..by5y38wWSptUtkN3y-wgPP1zmOinaO54j1_8THLPThnOTMGGheW7ZuuFR0GoNYMQzfKf0_UxsICCe8QgCq8dAg"
+                                "jws": "eyJhbGciOiAiRWREU0EiLCAiYjY0IjogZmFsc2UsICJjcml0IjogWyJiNjQiXX0..CvGRIw0aqQrXsXy1n3ChGfN1xs0Y56eiwS3spTlf_Ph4l5OQSFKId7SKNxBpFfI4GaQMKi8ajDVXvaIdT-N0DA"
                             }
                         }
                     ],
                     "proof": {
                         "type": "Ed25519Signature2018",
-                        "created": "2022-07-13T14:40:10Z",
+                        "created": "2022-07-21T13:18:07Z",
                         "proofPurpose": "assertionMethod",
                         "verificationMethod": "did:indy:local:test:YHXZLLSLnKxz5D2HQaKXcP#key-1",
-                        "jws": "eyJhbGciOiAiRWREU0EiLCAiYjY0IjogZmFsc2UsICJjcml0IjogWyJiNjQiXX0..DC1O21uovuhz3t4vH_aXxBZY3QKVuVtGaghzfYgCYA2wneuwHSqDDchpcXH8v168yXlkoB-0mzk0DUcPOjMsBQ"
+                        "jws": "eyJhbGciOiAiRWREU0EiLCAiYjY0IjogZmFsc2UsICJjcml0IjogWyJiNjQiXX0..pnipnhAJ34b9k8kBpRJfEAOdbiaSZK38TAJveSYyoBrKAMhF3DAJ_b0pChHvgghzy9QiAsal5ZFkl5fakIGwAg"
                     }
                 }
             """.trimIndent()
@@ -1199,8 +1022,8 @@ class ApplicationTest {
                 }.apply { }
             }
             assertTrue(issuanceDateException.message!!.contains(
-                "Invalid issuance date 2025-06-16T18:56:59Z " +
-                        "in verifiable credential http://example.edu/credentials/3735"))
+                "Invalid issuance date 2999-06-16T18:56:59Z " +
+                        "in verifiable credential http://example.edu/credentials/3888"))
 
             var vpWithVcWithoutProof = """
                 {

@@ -82,6 +82,15 @@ class AcaPyWalletServiceImpl(
         }
     }
 
+    override fun getAllBpns(): List<String> {
+        log.debug("List BPNs of created wallets")
+        return transaction {
+            val listOfWallets = walletRepository.getAll()
+            listOfWallets.map { walletRepository.toObject(it).bpn }
+        }
+    }
+
+
     override suspend fun registerBaseWallet(verKey: String): Boolean {
         log.debug("Register base wallet with bpn $baseWalletBpn and key $verKey")
         val catenaXWallet = getWalletExtendedInformation(baseWalletBpn)
@@ -254,6 +263,12 @@ class AcaPyWalletServiceImpl(
             return signedVcResult.signedDoc
         }
         throw BadRequestException(signedVcResult.error)
+    }
+
+    override suspend fun deleteCredential(id: String): Boolean {
+        log.debug("Delete Credential with id $id")
+        transaction { credentialRepository.deleteCredential(id) }
+        return true
     }
 
     override suspend fun resolveDocument(identifier: String): DidDocumentDto {
